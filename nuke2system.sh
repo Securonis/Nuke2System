@@ -167,7 +167,24 @@ nuke_all_disks() {
 # Main script
 while true; do
     clear
-    echo "SECURONIS LINUX - SYSTEM NUKE UTILITY"
+
+    # ASCII Art Banner using EOF
+    cat << "EOF"
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⡀⠀⠀⠀⠀⠀
+⠀⢀⣴⢾⠛⠳⡀⠀⠀⠀⠀⠀⠀⠀⡼⠀⠉⠓⢦⡀⠀⠀
+⢀⡞⢡⠏⡅⠀⠱⣄⠀⠀⠀⠀⠀⣸⠃⠀⠀⠢⣌⣿⣦⠀
+⣾⠀⣞⣼⢃⣴⢠⣈⡗⠂⣀⠐⢾⡋⠳⣼⢦⣄⠘⣆⣿⣷
+⡏⠰⠋⠘⠋⠟⢩⣿⡾⣿⢛⣻⣷⠙⡆⠘⣆⠙⣆⠘⢿⣿
+⢷⣦⣤⠶⠶⠚⠛⢹⡇⢣⣾⣻⡿⠀⣿⣤⣬⣤⣤⣤⣼⡇
+⠈⠉⠀⠀⠀⠀⠀⠀⠙⠾⠟⣫⣥⠀⠀⠀⠈⠉⠉⠉⠉⠁
+⠀⠀⠀⠀⠀⠀⠀⣰⣟⣒⣋⣁⡀⠳⡄⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣰⣻⣿⣉⠉⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢰⣯⣹⣿⣭⣉⣀⡀⢀⡠⠞⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠉⠉⠉⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+EOF
+
+    echo
+    echo "SECURONIS LINUX - SYSTEM NUKE"
     echo "===================================="
     echo
 
@@ -181,6 +198,8 @@ while true; do
     echo "5) Exit"
     echo
     read -p "Enter your choice (1-5): " method_choice
+done
+
 
 case "$method_choice" in
     1)
