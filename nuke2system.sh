@@ -198,8 +198,6 @@ EOF
     echo "5) Exit"
     echo
     read -p "Enter your choice (1-5): " method_choice
-done
-
 
 case "$method_choice" in
     1)
