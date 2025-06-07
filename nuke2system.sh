@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# SECURONIS LINUX - SYSTEM NUKE 
+# SECURONIS LINUX - SYSTEM NUKE UTILITY
 # This script completely erases all data from selected disks/partitions
 # leaving no recoverable traces behind.
 
+# Display prominent warning messages
 echo "============================================================"
 echo "                         WARNING                           "
 echo "                                                            " 
@@ -70,7 +71,7 @@ show_operation_warning() {
 nuke_with_dd() {
     local target=$1
     local size=$(blockdev --getsize64 "$target")
-    local size_gb=$(echo "scale=2; $size/1073741824" | bc)
+    local size_gb=$(printf "%.2f" "$(($size * 100 / 1073741824))e-2")
     
     show_operation_warning
     
@@ -167,25 +168,8 @@ nuke_all_disks() {
 # Main script
 while true; do
     clear
-
-    # ASCII Art Banner using EOF
-    cat << "EOF"
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⡀⠀⠀⠀⠀⠀
-⠀⢀⣴⢾⠛⠳⡀⠀⠀⠀⠀⠀⠀⠀⡼⠀⠉⠓⢦⡀⠀⠀
-⢀⡞⢡⠏⡅⠀⠱⣄⠀⠀⠀⠀⠀⣸⠃⠀⠀⠢⣌⣿⣦⠀
-⣾⠀⣞⣼⢃⣴⢠⣈⡗⠂⣀⠐⢾⡋⠳⣼⢦⣄⠘⣆⣿⣷
-⡏⠰⠋⠘⠋⠟⢩⣿⡾⣿⢛⣻⣷⠙⡆⠘⣆⠙⣆⠘⢿⣿
-⢷⣦⣤⠶⠶⠚⠛⢹⡇⢣⣾⣻⡿⠀⣿⣤⣬⣤⣤⣤⣼⡇
-⠈⠉⠀⠀⠀⠀⠀⠀⠙⠾⠟⣫⣥⠀⠀⠀⠈⠉⠉⠉⠉⠁
-⠀⠀⠀⠀⠀⠀⠀⣰⣟⣒⣋⣁⡀⠳⡄⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⣰⣻⣿⣉⠉⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢰⣯⣹⣿⣭⣉⣀⡀⢀⡠⠞⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠉⠉⠉⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-EOF
-
-    echo
     echo "SECURONIS LINUX - SYSTEM NUKE"
-    echo "===================================="
+    echo "============================"
     echo
 
     list_disks
