@@ -4,6 +4,26 @@
 # This script completely erases all data from selected disks/partitions
 # leaving no recoverable traces behind.
 
+# Check if system is running from live media
+check_live_system() {
+    # Check for common indicators of a live system
+    if grep -q 'boot=casper' /proc/cmdline || \
+       grep -q 'boot=live' /proc/cmdline || \
+       grep -q 'overlayroot' /proc/cmdline || \
+       [ -d /run/initramfs/live ] || \
+       [ -d /run/live ] || \
+       [ -f /usr/share/xsessions/plasma-live.desktop ] || \
+       [ -f /etc/live.conf ]; then
+        echo "WARNING: This script should not be run from a live system!"
+        echo "Running this script from a live system could damage the wrong drives."
+        echo "Exiting for safety reasons."
+        exit 1
+    fi
+}
+
+# Run the live system check
+check_live_system
+
 # Display prominent warning messages
 echo "============================================================"
 echo "                         WARNING                           "
@@ -168,6 +188,22 @@ nuke_all_disks() {
 # Main script
 while true; do
     clear
+    # ASCII Art Banner using EOF
+    cat << "EOF"
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⡀⠀⠀⠀⠀⠀
+⠀⢀⣴⢾⠛⠳⡀⠀⠀⠀⠀⠀⠀⠀⡼⠀⠉⠓⢦⡀⠀⠀
+⢀⡞⢡⠏⡅⠀⠱⣄⠀⠀⠀⠀⠀⣸⠃⠀⠀⠢⣌⣿⣦⠀
+⣾⠀⣞⣼⢃⣴⢠⣈⡗⠂⣀⠐⢾⡋⠳⣼⢦⣄⠘⣆⣿⣷
+⡏⠰⠋⠘⠋⠟⢩⣿⡾⣿⢛⣻⣷⠙⡆⠘⣆⠙⣆⠘⢿⣿
+⢷⣦⣤⠶⠶⠚⠛⢹⡇⢣⣾⣻⡿⠀⣿⣤⣬⣤⣤⣤⣼⡇
+⠈⠉⠀⠀⠀⠀⠀⠀⠙⠾⠟⣫⣥⠀⠀⠀⠈⠉⠉⠉⠉⠁
+⠀⠀⠀⠀⠀⠀⠀⣰⣟⣒⣋⣁⡀⠳⡄⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣰⣻⣿⣉⠉⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢰⣯⣹⣿⣭⣉⣀⡀⢀⡠⠞⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠉⠉⠉⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+EOF
+
+    echo
     echo "SECURONIS LINUX - SYSTEM NUKE"
     echo "============================"
     echo
